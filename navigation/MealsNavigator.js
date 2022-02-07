@@ -240,14 +240,17 @@ let Drawer = createDrawerNavigator();
 
 let MainNavigator = ()=>{
     return (
-        <Drawer.Navigator>
-           
+        <Drawer.Navigator> 
             <Drawer.Screen
                 name='Filters'
-                component={FilterScreen}
+                component={FilterNavigation}
+            />
+            <Drawer.Screen 
+                name='FavNavigator'
+                component={TabScreenConfig}
             />
         </Drawer.Navigator>
     )
 }
 
-export default FilterNavigation
+export default MainNavigator
