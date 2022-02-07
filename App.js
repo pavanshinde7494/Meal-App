@@ -5,7 +5,7 @@ import * as Font from 'expo-font'
 import { enableScreens } from 'react-native-screens'
 import { NavigationContainer } from '@react-navigation/native'
 
-import MealsNavigator from './navigation/MealsNavigator';
+import MainNavigator from './navigation/MealsNavigator';
 
 
 enableScreens();
@@ -26,7 +26,7 @@ export default function App() {
 
     if(!fontLoaded){
       return (
-        <AppLoading 
+        <AppLoading  
           startAsync={fetchFonts} 
           onFinish={()=>setFontLoaded(true)} 
           onError={(err)=>{console.log(err);}}
@@ -36,7 +36,7 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <MealsNavigator />
+            <MainNavigator />
         </NavigationContainer>
         
     );

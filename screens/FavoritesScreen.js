@@ -1,11 +1,15 @@
 import React from 'react';
-import { View , Text ,StyleSheet } from 'react-native';
+import { View , Text ,StyleSheet , Button } from 'react-native';
 
-export default function FavoritesScreen() {
+import MealList from '../components/MealList';
+import { MEALS } from '../Data/dummy-data'
+
+export default function FavoritesScreen(props) {
+  const favMeals = MEALS.filter((meal)=>{
+    return (meal.id == 'm1' || meal.id == 'm2')
+  })
   return (
-      <View>
-          <Text>FavoritesScreen</Text>
-      </View>
+      <MealList listData = {favMeals} navigation = {props.navigation} />
   );
 }
 
