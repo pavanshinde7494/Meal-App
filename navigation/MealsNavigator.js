@@ -45,6 +45,7 @@ import FilterScreen from '../screens/FilterScreen'
 import Colors from '../constants/Colors';
 import { Text , Platform } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
+import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 let Stack = createStackNavigator();
 
@@ -54,7 +55,8 @@ let config =  {
         backgroundColor : Colors.primary,
     },
     headerTitleStyle : {
-        fontFamily : 'open-sans-bold'
+        fontFamily : 'open-sans-bold',
+        textAlign : 'center'
     },
     headerTintColor : 'white',
 }
@@ -134,7 +136,7 @@ let TabScreenConfig = (Platform.OS == 'android')
             <MTab.Navigator 
                 activeColor='white'
                 shifting = {true}
-                screenListeners={{ 
+                screenOptions={{ 
                     headerShown: false ,
                     // tabBarInactiveTintColor : ,
                     // tabBarActiveTintColor : Colors.accent ,
@@ -142,13 +144,14 @@ let TabScreenConfig = (Platform.OS == 'android')
                     // tabBarActiveBackgroundColor :
 
                     // tabBarShowLabel : false
-
+                  
 
                 }}
             >
                 <MTab.Screen 
                     name='MealsNavigator' 
                     component={MealsNavigator} 
+                    
                     options={{
                         tabBarIcon : (tabInfo)=>{
                             return <Ionicons 
@@ -157,7 +160,15 @@ let TabScreenConfig = (Platform.OS == 'android')
                                     color= {tabInfo.color}
                                 />
                         },
-                        tabBarLabel : 'Meals',
+                        tabBarLabel : (
+                            <Text 
+                                style={{
+                                    fontFamily : 'open-sans'
+                                }}
+                            >
+                                Meals
+                            </Text>
+                        ) ,
                         tabBarColor : Colors.accent,
                     }}
                 />
@@ -172,6 +183,15 @@ let TabScreenConfig = (Platform.OS == 'android')
                                     color= {tabInfo.color}
                                 />
                         },
+                        tabBarLabel : (
+                            <Text 
+                                style={{
+                                    fontFamily : 'open-sans'
+                                }}
+                            >
+                                Favorite
+                            </Text>
+                        ) ,
                         tabBarColor : Colors.primary
                     }}
                 />
@@ -203,7 +223,7 @@ let TabScreenConfig = (Platform.OS == 'android')
                                     color= {tabInfo.color}
                                 />
                         },
-                        tabBarLabel : 'Meals'
+                        tabBarLabel : 'Pavan'
                     }}
                 />
                 <Tab.Screen 
@@ -217,7 +237,7 @@ let TabScreenConfig = (Platform.OS == 'android')
                                     color= {tabInfo.color}
                                 />
                         },
-                        
+                        tabBarLabel : 'Favorite' ,
                     }}
                 />
             </Tab.Navigator>
@@ -227,11 +247,17 @@ let TabScreenConfig = (Platform.OS == 'android')
 
 let FilterNavigation = ()=>{
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={config}
+            initialRouteName='Filters'
+            
+        >
             <Stack.Screen 
                 name='Filters' 
                 component={FilterScreen} 
             />
+
+            
         </Stack.Navigator>
     )
 }
@@ -240,15 +266,30 @@ let Drawer = createDrawerNavigator();
 
 let MainNavigator = ()=>{
     return (
-        <Drawer.Navigator> 
+        <Drawer.Navigator
+            initialRouteName='FavNavigator'
+            screenOptions={{
+                headerShown : false,
+                drawerActiveTintColor : 'white',
+                drawerActiveBackgroundColor :Colors.primary ,
+                drawerLabelStyle : {
+                    fontFamily : 'open-sans-bold'
+                }
+                
+            }}
+        > 
+            <Drawer.Screen 
+                name='FavNavigator'
+                component={TabScreenConfig}
+                options={{
+                    drawerLabel : 'Home'
+                }}
+            />
             <Drawer.Screen
                 name='Filters'
                 component={FilterNavigation}
             />
-            <Drawer.Screen 
-                name='FavNavigator'
-                component={TabScreenConfig}
-            />
+           
         </Drawer.Navigator>
     )
 }

@@ -1,11 +1,27 @@
 import React from 'react';
-import { View , Text ,StyleSheet , Button ,FlatList ,TouchableOpacity } from 'react-native';
+import { View , Text ,StyleSheet , Button ,FlatList ,TouchableOpacity , TouchableNativeFeedback } from 'react-native';
 import { CATEGORIES } from '../Data/dummy-data'; 
 import CategoryGridTile from '../components/CategoryGridTile';
-
+import { Ionicons } from '@expo/vector-icons';
 
 export default function CategoriesScreen(props) {
-    console.log(props.navigation , props.route);
+    console.log(props.navigation );
+
+    props.navigation.setOptions({
+        headerLeft : ()=>{
+            return (
+                <View style={{marginLeft : 8}} >
+                    <Ionicons 
+                        onPress={()=>{props.navigation.toggleDrawer()}}
+                        name="ios-menu" 
+                        size={24} 
+                        color="white" 
+                    />
+                </View>
+            )
+        }
+
+      });
 
     const renderGridItem = (itemData) => {    
     
